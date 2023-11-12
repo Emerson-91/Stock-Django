@@ -1,0 +1,11 @@
+﻿{% load static %}
+{% include "header.html" %}
+
+<form method="POST" action="">
+    {% csrf_token%}
+    <h1> Tem certeza que deseja Excluir? </h1>
+    <input class="btn btn-danger" type="submit" value="Sim" />
+    <a href="/lista_itens"><div class="btn btn-primary">Cancelar</div></a>
+</form>
+
+{% include "footer.html" %}

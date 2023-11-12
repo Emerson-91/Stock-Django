@@ -13,6 +13,8 @@
 }
 
 .titulo {
+    font-family: helvetica;
+    font-weight: bolder;
     text-align: center;
 }
 
@@ -39,15 +41,3 @@ th {
     box-shadow: 12px 12px 20px 6px #05080a;
 }
 
-
-
-.header {
-    font-family: helvetica;
-    color: #337ab7;
-    font-size: 50px;
-    text-align: center;
-    width: 100%;
-    text-shadow: 6px 6px 6px #c9c6c6;
-    display: block;
-    font-weight: bolder;
-}

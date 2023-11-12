@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .forms import StockCreateForm
 
-from .models import Stock
+from .models import Stock, Categoria
 
 class StockCreateAdmin(admin.ModelAdmin):
     list_display = ['categoria', 'nome_item', 'quantidade']
@@ -11,3 +11,4 @@ class StockCreateAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Stock, StockCreateAdmin)
+admin.site.register(Categoria)
