@@ -1,0 +1,56 @@
+﻿{% load static %}
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="auto">
+  <head><script src="{% static 'js/color-modes.js'%}"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <title>{{title}}</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/navbar-fixed/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!--<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  </head>
+  <body>
+<!-- Section: Design Block -->
+<section class=" text-center text-lg-start">
+
+    <div class="card mb-3">
+      <div class="row g-0 d-flex align-items-center">
+        <div class="col-lg-4 d-none d-lg-flex">
+          <img src="{% static 'img/login.jpg'%}" alt="Estoque DI"
+            class="w-100 rounded-t-5 rounded-tr-lg-0 rounded-bl-lg-5" />
+        </div>
+        <div class="col-lg-8">
+          <div class="card-body py-5 px-md-5">
+            <h1 class="titulo">Sistema de Controle Depto Informática </h1>
+            <h2>autenticacao video 29 -> https://www.youtube.com/watch?v=D2T0bKB8qG8&list=PL6RgKo1nB4TlJDfWz3czfXHkg8wSn8THV&index=30&ab_channel=Arbadjie</h2>
+          </br></br>
+            <form>
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="email" id="form2Example1" class="form-control" />
+                <label class="form-label" for="form2Example1">Usuário</label>
+              </div>
+  
+              <!-- Password input -->
+              <div class="form-outline mb-4">
+                <input type="password" id="form2Example2" class="form-control" />
+                <label class="form-label" for="form2Example2">Senha</label>
+              </div>
+                <!-- Submit button -->
+              <button type="button" class="btn btn-primary btn-block mb-4">Entrar</button>
+  
+            </form>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Design Block -->
+  {% include "footer.html" %}

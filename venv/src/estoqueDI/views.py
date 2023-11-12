@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import csv
 from .models import *
-from .forms import StockCreateForm, stockSearchForm, StockUpdateForm, SaidaForm, EntradaForm
+from .forms import *
 from django.contrib import messages
 
 
@@ -15,6 +15,12 @@ def home(request):
     }
     return render(request, "home.html", context)
 
+def login(request):
+    title = "Login"
+    context = {
+        "title": title,
+    }
+    return render(request, "login.html", context)
 
 def lista_itens(request):
     title = "Relação de Materiais"
@@ -130,5 +136,21 @@ def entrada_items(request, pk):
         "title": 'Receber o item: ' + str(queryset.nome_item),
         "instance": queryset,
         "form": form,
+    }
+    return render(request, "adicionar_itens.html", context)
+
+
+def reorderlevel(request, pk):
+    queryset = Stock.objects.get(id=pk)
+    form = ReorderLevelForm(request.POST or None, instance=queryset)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        messages.success(request, "Nivel de reabastecimento de " + str(
+            instance.nome_item) + "é atualizado para " + str(instance.reorder_level))
+        return redirect('/lista_itens')
+    context={
+        "instance":queryset,
+        "form": form
     }
     return render(request, "adicionar_itens.html", context)

@@ -4,6 +4,7 @@
     <div class="bg-body-tertiary p-5 rounded display_table">
         <a href="{% url 'saida_items' queryset.id %}"><div class='btn btn-danger'> SAIDA DO ITEM </div></a>
         <a href="{% url 'entrada_items' queryset.id %}"><div class='btn btn-primary'> ENTRADA DO ITEM </div></a>
+        <a href="{% url 'lista_itens' %}"><div class='btn btn-secondary'> CANCELAR </div></a>
     </br></br>
         <div class="display_table2">
             <table class='table'>
@@ -12,7 +13,7 @@
                         <th>NOME DO ITEM</th>
                         <th> QUANTIDADE NO ESTOQUE</th>
                         <th> ULTIMA ATUALIZAÇÃO</th>
-                        <th> REORDER LEVEL </th>
+                        <th> NIVEL REABASTECIMENTO </th>
                     </tr>
                     </thead>
                 <tr>

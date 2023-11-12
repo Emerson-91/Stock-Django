@@ -18,13 +18,13 @@
     text-align: center;
 }
 
-/*Make alternating colors for the table rows*/
-.table tr:nth-child(odd) {
-    background-color: #B8CAE4
+tr a {
+    text-decoration: none;
 }
 
-.table tr:nth-child(even) {
-    background-color: #0b0e13
+tr a:hover {
+    color: aqua;
+    text-decoration: none;
 }
 
 th {
@@ -41,3 +41,24 @@ th {
     box-shadow: 12px 12px 20px 6px #05080a;
 }
 
+.fontealerta {
+    color: rgb(207, 7, 7);
+    font-size: 1.5em;
+    text-decoration: none;
+    text-align: center;
+    animation: animate 1.5s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

@@ -19,21 +19,29 @@
                         <th>CATEGORIA</th>
                         <th>NOME DO ITEM</th>
                         <th> QUANTIDADE NO ESTOQUE</th>
-                        <th> DATA ADICIONADO</th>
+                        <th> NIVEL REABASTECIMENTO </th>
+                        <!--<th> DATA ADICIONADO</th>-->
                         <th> ULTIMA ATUALIZAÇÃO</th>
                         <th></th>
                     </tr>
                     </thead>
             {% for instance in queryset %}
                 <tr>
-                    <td>{{forloop.counter}}</td>
+                    
+                    <td><a href="{% url 'atualizar_itens' instance.id %}">{{forloop.counter}}</a></td>
                     <td>{{instance.categoria}}</td>
                     <td>{{instance.nome_item}}</td>
-                    <td><a href="{% url 'detalhe_estoque' instance.id %}">{{instance.quantidade}}</a></td>
-                    <td>{{instance.data_adicionado}}</td>
+                    <td>{% if instance.quantidade <= instance.reorder_level %}
+                            <div class="fontealerta">{{instance.quantidade}}</div>
+                            {% else %}{{instance.quantidade}}</a>
+                            {% endif %}
+                        </button>
+                      </td>
+                    <td><a href="{% url 'reorderlevel' instance.id %}">{{instance.reorder_level}}</a></td>
+                    <!--<td>{{instance.data_adicionado}}</td>-->
                     <td>{{instance.last_updated}}</td>
                     <td>
-                        <a href="{% url 'atualizar_itens' instance.id %}"><button type="button" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button></a>
+                        <a href="{% url 'detalhe_estoque' instance.id %}"><button type="button" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button></a>
                         <a href="{%url 'delete_itens' instance.id %}"><button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button></a> </td>
                 </tr>
             {% endfor %}
