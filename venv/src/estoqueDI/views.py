@@ -4,6 +4,7 @@ import csv
 from .models import *
 from .forms import *
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -22,6 +23,7 @@ def login(request):
     }
     return render(request, "login.html", context)
 
+@login_required
 def lista_itens(request):
     title = "Relação de Materiais"
     form = stockSearchForm(request.POST or None)
@@ -52,7 +54,7 @@ def lista_itens(request):
         }
     return render(request, "lista_itens.html", context)
 
-
+@login_required
 def adicionar_itens(request):
     form = StockCreateForm(request.POST or None)
     if form.is_valid():
@@ -65,7 +67,7 @@ def adicionar_itens(request):
     }
     return render(request, "adicionar_itens.html", context)
 
-
+@login_required
 def atualizar_itens(request, pk):
     queryset = Stock.objects.get(id=pk)
     form = StockUpdateForm(instance=queryset)
@@ -80,7 +82,7 @@ def atualizar_itens(request, pk):
     }
     return render(request, 'adicionar_itens.html', context)
 
-
+@login_required
 def delete_itens(request, pk):
     queryset = Stock.objects.get(id=pk)
     if request.method == 'POST':
@@ -89,7 +91,7 @@ def delete_itens(request, pk):
         return redirect('/lista_itens')
     return render(request, 'delete_itens.html')
 
-
+@login_required
 def detalhe_estoque(request, pk):
     queryset = Stock.objects.get(id=pk)
     context = {
@@ -98,12 +100,13 @@ def detalhe_estoque(request, pk):
     }
     return render(request, "detalhe_estoque.html", context)
 
-
+@login_required
 def saida_items(request, pk):
     queryset = Stock.objects.get(id=pk)
     form = SaidaForm(request.POST or None, instance=queryset)
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.quantidade_recebida=0
         instance.quantidade -= instance.quantidade_entregue
         messages.success(request, "Baixa com SUCESSO. " + str(instance.quantidade) +
                          " " + str(instance.nome_item) + "s restantes no estoque")
@@ -119,12 +122,13 @@ def saida_items(request, pk):
     }
     return render(request, "adicionar_itens.html", context)
 
-
+@login_required
 def entrada_items(request, pk):
     queryset = Stock.objects.get(id=pk)
     form = EntradaForm(request.POST or None, instance=queryset)
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.quantidade_entregue = 0
         instance.quantidade += instance.quantidade_recebida
         instance.save()
         messages.success(request, "Recebido com SUCESSO. " + str(
@@ -139,7 +143,7 @@ def entrada_items(request, pk):
     }
     return render(request, "adicionar_itens.html", context)
 
-
+@login_required
 def reorderlevel(request, pk):
     queryset = Stock.objects.get(id=pk)
     form = ReorderLevelForm(request.POST or None, instance=queryset)
@@ -154,3 +158,13 @@ def reorderlevel(request, pk):
         "form": form
     }
     return render(request, "adicionar_itens.html", context)
+
+@login_required
+def lista_historico(request):
+    title = 'HISTORICO DOS ITENS'
+    queryset = StockHistory.objects.all()
+    context = {
+        "title": title,
+        "queryset": queryset,
+    }
+    return render(request, "lista_historico.html", context)

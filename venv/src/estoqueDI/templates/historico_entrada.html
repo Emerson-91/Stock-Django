@@ -1,0 +1,27 @@
+﻿
+<main class="container">
+    <div class="bg-body-tertiary p-5 rounded display_table">
+      <h2 class="titulo">HISTORICO DE MATERIAIS RECEBIDOS</h2>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>COUNT</th>
+            <th>CATEGORIA</th>
+            <th>NOME ITEM</th>
+            <th>QUANTIDADE RECEBIDA</th>
+            <th>ULTIMA ATUALIZAÇÃO</th>
+          </tr>
+        </thead>
+      {% for instance in queryset %}
+          <tr>
+  
+            <td>{{forloop.counter}}</td>
+            <td>{{instance.categoria}}</td>
+            <td>{{instance.nome_item}}</td>
+            <td>{{instance.quantidade_recebida}}</td>
+            <td>{{instance.last_updated}}</td>
+          </tr>
+      {% endfor %}
+    </table>
+  </div>
+  </main>

@@ -1,0 +1,23 @@
+﻿{%load static%}
+{% include "header.html" %}
+<main class="container">
+    <div class="bg-body-tertiary p-5 rounded display_table">
+        <div class="titulo">
+            <a class="historico-button btn " data-tabela="tabelaHistoricoItens">Histórico geral de materiais</a>
+            <a class="historico-button btn " data-tabela="tabelaHistoricosaida">Histórico de Saída de Materiais</a>
+            <a class="historico-button btn " data-tabela="tabelaHistoricorecebido">Histórico de materiais recebidos</a>
+        </div>  
+
+        <div id="tabelaHistoricoItens" class="historico-tabela" style="display: none;">
+            {% include 'historico_geral.html' %}
+        </div>
+        <div id="tabelaHistoricosaida" class="historico-tabela" style="display: none;">
+            {% include 'historico_saida.html' %}
+        </div>
+        <div id="tabelaHistoricorecebido" class="historico-tabela" style="display: none;">
+            {% include 'historico_entrada.html' %}
+        </div>
+    </div>
+
+</main>
+{% include "footer.html" %}

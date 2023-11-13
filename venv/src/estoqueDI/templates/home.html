@@ -1,11 +1,15 @@
 ﻿{%load static%}
 {% include "header.html" %}
 <main class="container">
-  <div class="bg-body-tertiary p-5 rounded">
+  <div class="bg-body-tertiary p-5 rounded display_table">
     <h1>{{text}}</h1>
     <p class="lead">Sistema desenvolvido para controle de entrada e saida de materiais novos e usados do <br> <strong>Departamento de Informática - Suporte e Redes </strong>.</p>
+    {% if request.user.is_authenticated %}
+        {% else %}
+        <h3> Para iniciar Faça <a href="/accounts/login">Login</a></h3>
+        {% endif %}
     <!--<a class="btn btn-lg btn-primary" href="/docs/5.3/components/navbar/" role="button">View navbar docs &raquo;</a> -->
-    </div>
+  </div>
 </main>
 {% include "footer.html" %}
 
