@@ -1,7 +1,17 @@
-﻿
+﻿{% load static %}
+{% include "header.html" %}
+{% load crispy_forms_tags %}
 <main class="container">
-  <div class="bg-body-tertiary p-5 rounded display_table">
-    <h2 class="titulo">HISTÓRICO TOTAL</h2>
+    <div class="bg-body-tertiary p-5 rounded display_table">
+    <h2 class="titulo">{{title}}</h2>
+    <div class="form-row">
+      <div class="col">
+    <form method='POST' action=''>{% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value='Pesquisar'/>
+    </form>
+  </div>
+</div>
     <table class='table'>
       <thead>
         <tr>
@@ -25,7 +35,11 @@
           <td>{{instance.nome_item}}</td>
           <td>{{instance.quantidade}}</td>
           <td>{{instance.quantidade_entregue}}</td>
+          {% if instance.quantidade_entregue == 0%}
+          <td> -- </td>
+          {% else %} 
           <td>{{instance.entregue_para}}</td>
+          {% endif %}
           <td>{{instance.quantidade_recebida}}</td>
           <td>{{instance.last_updated}}</td>
         </tr>
@@ -33,3 +47,4 @@
   </table>
 </div>
 </main>
+{% include "footer.html" %}

@@ -63,3 +63,11 @@ th {
     }
 }
 
+.espaco {
+    padding: 1% 1% 0% 5% !important;
+}
+
+.teste {
+    padding: 30%;
+    width: 40%;
+}

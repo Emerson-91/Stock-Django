@@ -1,5 +1,5 @@
 ﻿from django import forms
-from .models import Stock
+from .models import Stock, StockHistory
 
 
 class StockCreateForm(forms.ModelForm):
@@ -26,11 +26,19 @@ class StockCreateForm(forms.ModelForm):
 
 class stockSearchForm(forms.ModelForm):
     exportar_para_csv = forms.BooleanField(required=False)
-
     class Meta:
         model = Stock
         fields = ['categoria', 'nome_item']
 
+class StockHistorySearchForm(forms.ModelForm):
+    exportar_para_csv = forms.BooleanField(required=False)
+    exportar_para_pdf = forms.BooleanField(required=False)
+    data_inicio = forms.DateTimeField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    data_fim = forms.DateTimeField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    class Meta:
+        model = StockHistory
+        fields = ['categoria', 'nome_item', 'data_inicio', 'data_fim']
+  
 
 class StockUpdateForm(forms.ModelForm):
     class Meta:

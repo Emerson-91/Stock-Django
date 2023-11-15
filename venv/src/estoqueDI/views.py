@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
+from django.template.loader import get_template
 from django.http import HttpResponse
+#from weasyprint import HTML
+from django.utils import timezone
 import csv
 from .models import *
 from .forms import *
@@ -160,11 +163,131 @@ def reorderlevel(request, pk):
     return render(request, "adicionar_itens.html", context)
 
 @login_required
-def lista_historico(request):
+def historico_geral(request):
     title = 'HISTORICO DOS ITENS'
+    form = StockHistorySearchForm(request.POST or None)
     queryset = StockHistory.objects.all()
+
+    if request.method == 'POST':
+        form = StockHistorySearchForm(request.POST)
+        if form.is_valid():
+            nome_item = form.cleaned_data.get('nome_item')
+            categoria = form.cleaned_data.get('categoria')
+            data_inicio = form.cleaned_data.get('data_inicio')
+            data_fim = form.cleaned_data.get('data_fim')
+            
+            if nome_item:
+                queryset = queryset.filter(nome_item__icontains=nome_item)
+            if categoria:
+                queryset = queryset.filter(categoria=categoria)
+            if data_inicio:
+                queryset = queryset.filter(last_updated__gte=data_inicio)
+            if data_fim:
+                data_fim = timezone.datetime.combine(data_fim, timezone.datetime.max.time())
+                queryset = queryset.filter(last_updated__lte=data_fim)
+            
+            if form['exportar_para_csv'].value() == True:
+                response = HttpResponse(content_type='text/csv')
+                response['Content-Disposition'] = 'attachment; filename="Lista do Estoque.csv"'
+                writer = csv.writer(response)
+                writer.writerow(['CATEGORIA', 'NOME ITEM', 'QUANTIDADE'])
+                instance = queryset
+                for stockHistory in instance:
+                    writer.writerow(
+                        [stockHistory.categoria, stockHistory.nome_item, stockHistory.quantidade])
+                return response
+        
     context = {
         "title": title,
         "queryset": queryset,
+        "form": form,
     }
-    return render(request, "lista_historico.html", context)
+
+    return render(request, "historico_geral.html", context)
+
+@login_required
+def historico_entrada(request):
+    title = 'HISTORICO DE MATERIAIS RECEBIDOS'
+    form = StockHistorySearchForm(request.POST or None)
+    queryset = StockHistory.objects.all()
+
+    if request.method == 'POST':
+        form = StockHistorySearchForm(request.POST)
+        if form.is_valid():
+            nome_item = form.cleaned_data.get('nome_item')
+            categoria = form.cleaned_data.get('categoria')
+            data_inicio = form.cleaned_data.get('data_inicio')
+            data_fim = form.cleaned_data.get('data_fim')
+            
+            if nome_item:
+                queryset = queryset.filter(nome_item__icontains=nome_item)
+            if categoria:
+                queryset = queryset.filter(categoria=categoria)
+            if data_inicio:
+                queryset = queryset.filter(last_updated__gte=data_inicio)
+            if data_fim:
+                data_fim = timezone.datetime.combine(data_fim, timezone.datetime.max.time())
+                queryset = queryset.filter(last_updated__lte=data_fim)
+                
+            if form['exportar_para_csv'].value() == True:
+                response = HttpResponse(content_type='text/csv')
+                response['Content-Disposition'] = 'attachment; filename="Lista do materiais recebidos.csv"'
+                writer = csv.writer(response)
+                writer.writerow(['CATEGORIA', 'NOME ITEM', 'QUANTIDADE RECEBIDA'])
+                instance = queryset
+                for stockHistory in instance:
+                    if stockHistory.quantidade_recebida != 0:
+                        writer.writerow(
+                            [stockHistory.categoria, stockHistory.nome_item, stockHistory.quantidade_recebida])
+                return response
+    context = {
+        "title": title,
+        "queryset": queryset,
+        "form": form,
+    }
+
+    return render(request, "historico_entrada.html", context)
+
+@login_required
+def historico_saida(request):
+    title = 'HISTORICO DE SAIDA DOS MATERIAIS'
+    form = StockHistorySearchForm(request.POST or None)
+    queryset = StockHistory.objects.all()
+
+    if request.method == 'POST':
+        form = StockHistorySearchForm(request.POST)
+        if form.is_valid():
+            nome_item = form.cleaned_data.get('nome_item')
+            categoria = form.cleaned_data.get('categoria')
+            data_inicio = form.cleaned_data.get('data_inicio')
+            data_fim = form.cleaned_data.get('data_fim')
+            
+            if nome_item:
+                queryset = queryset.filter(nome_item__icontains=nome_item)
+            if categoria:
+                queryset = queryset.filter(categoria=categoria)
+            if data_inicio:
+                queryset = queryset.filter(last_updated__gte=data_inicio)
+            if data_fim:
+                data_fim = timezone.datetime.combine(data_fim, timezone.datetime.max.time())
+                queryset = queryset.filter(last_updated__lte=data_fim)
+            
+            if form['exportar_para_csv'].value() == True:
+                response = HttpResponse(content_type='text/csv')
+                response['Content-Disposition'] = 'attachment; filename="Lista de Saida de Estoque.csv"'
+                writer = csv.writer(response)
+                writer.writerow(['CATEGORIA', 'NOME ITEM', 'QUANTIDADE Entregue', 'Setor Entregue', 'Data de Entrega' ])
+                instance = queryset
+                for stockHistory in instance:
+                    if stockHistory.quantidade_entregue != 0:
+                        writer.writerow(
+                            [stockHistory.categoria, stockHistory.nome_item, stockHistory.quantidade_entregue, stockHistory.entregue_para, stockHistory.last_updated ])
+                return response
+
+    context = {
+        "title": title,
+        "queryset": queryset,
+        "form": form,
+    }
+
+    return render(request, "historico_saida.html", context)

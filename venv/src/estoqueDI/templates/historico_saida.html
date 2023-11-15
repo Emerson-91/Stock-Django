@@ -1,7 +1,13 @@
-﻿
+﻿{% load static %}
+{% include "header.html" %}
+{% load crispy_forms_tags %}
 <main class="container">
     <div class="bg-body-tertiary p-5 rounded display_table">
-      <h2 class="titulo">HISTÓRICO DE SAÍDA DE MATERIAL</h2>
+    <h2 class="titulo">{{title}}</h2>
+      <form method='POST' action=''>{% csrf_token %}
+        {{form|crispy}}
+        <input type="submit" value='Pesquisar'/>
+    </form>
       <table class='table'>
         <thead>
             <tr>
@@ -15,15 +21,17 @@
           </thead>
         {% for instance in queryset %}
             <tr>
-    
+            {% if instance.quantidade_entregue > 0 %}
               <td>{{forloop.counter}}</td>
               <td>{{instance.categoria}}</td>
               <td>{{instance.nome_item}}</td>
               <td>{{instance.quantidade_entregue}}</td>
               <td>{{instance.entregue_para}}</td>
               <td>{{instance.last_updated}}</td>
+            {% endif%}
             </tr>
         {% endfor %}
     </table>
   </div>
   </main>
+  {% include "footer.html" %}

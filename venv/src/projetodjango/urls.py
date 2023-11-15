@@ -31,7 +31,9 @@ urlpatterns = [
     path('saida_items/<str:pk>/', views.saida_items, name='saida_items'),
     path('entrada_items/<str:pk>/', views.entrada_items, name='entrada_items'),
     path('reorderlevel/<str:pk>/', views.reorderlevel, name='reorderlevel'),
-    path('lista_historico/', views.lista_historico, name='lista_historico/'),
+    path('historico_geral/', views.historico_geral, name='historico_geral/'),
+    path('historico_entrada/', views.historico_entrada, name='historico_entrada/'),
+    path('historico_saida/', views.historico_saida, name='historico_saida/'),
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.default.urls')),
 
