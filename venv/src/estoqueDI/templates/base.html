@@ -1,13 +1,15 @@
 ﻿{%load static%}
 {% include "header.html" %}
-<main class="container">
+<main class="container-login">
   <div class="bg-body-tertiary p-5 rounded display_table">
-    <h1>{{text}}</h1>
-     {% block title %}
-    {% endblock %}
-
-    {% block content %}
-    {% endblock %}    
+    <div class="form-login">
+      <div class="titulo">
+        {% block title %}
+        {% endblock %}
+      </div>
+        {% block content %}
+        {% endblock %}
+    </div>    
 </div>
 </main>
 {% include "footer.html" %}

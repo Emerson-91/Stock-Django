@@ -12,10 +12,15 @@
     text-align: center;
 }
 
+.form-login {
+    text-align: center;
+}
+
 .titulo {
     font-family: helvetica;
     font-weight: bolder;
     text-align: center;
+    padding-bottom: 2%;
 }
 
 tr a {
@@ -70,4 +75,13 @@ th {
 .teste {
     padding: 30%;
     width: 40%;
+}
+
+.container-login {
+    display: flex;
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
+    /* Centraliza verticalmente */
+
 }
