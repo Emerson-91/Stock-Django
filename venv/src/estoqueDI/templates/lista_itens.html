@@ -57,17 +57,18 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modaldeletarLabel{{ instance.id }}">Confirmação de Exclusão</h5>
+                <h4 class="modal-title" id="modaldeletarLabel{{ instance.id }}">Tem certeza que deseja Excluir?</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
                 <form method="POST" action="{% url 'delete_itens' instance.id %}">
                     {% csrf_token %}
-                    <h1>Tem certeza que deseja Excluir?</h1>
-                    <p>Digite o nome do item "{{ instance.nome_item }}" para confirmar a exclusão</p>
-                    <input type="text" name="valor" />
-                    <input class="btn btn-danger" type="submit" value="Sim" />
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                    <p>Digite o nome do item "<strong>{{ instance.nome_item }}</strong>" para confirmar a exclusão</p>
+                    <div class="form-modal">
+                        <input type="text" name="valor" />
+                        <input class="btn btn-danger" type="submit" value="Sim" />
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>    
                 </form>
             </div>
         </div>

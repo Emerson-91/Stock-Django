@@ -28,6 +28,12 @@
     text-align: center;
 }
 
+.form-modal {
+    text-align: center;
+    align-content: space-between;
+
+}
+
 .titulo {
     font-family: helvetica;
     font-weight: bolder;
