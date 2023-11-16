@@ -1,53 +1,78 @@
-﻿{%load static%}
+﻿{% load static %}
 {% load crispy_forms_tags %}
 {% include "header.html" %}
 
 <main class="container">
-    <div class="bg-body-tertiary p-5 rounded display_table">
-        <h1 class="titulo">{{title}}</h1>
-    </br>
-    <form method='POST' action=''>{% csrf_token%}
-        {{form|crispy}}
-        <input type="submit" value="Pesquisar"/>
-    </form>
-    </br>    
+    <div class="efeito-vidro display_table">
+        <h1 class="titulo">{{ title }}</h1>
+        </br>
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Pesquisar"/>
+        </form>
+        </br>
         <div class="display_table2">
             <table class='table'>
-                    <thead>
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>CATEGORIA</th>
                         <th>NOME DO ITEM</th>
-                        <th> QUANTIDADE NO ESTOQUE</th>
-                        <th> NIVEL REABASTECIMENTO </th>
-                        <!--<th> DATA ADICIONADO</th>-->
-                        <th> ULTIMA ATUALIZAÇÃO</th>
+                        <th>QUANTIDADE NO ESTOQUE</th>
+                        <th>NÍVEL REABASTECIMENTO</th>
+                        <th>ÚLTIMA ATUALIZAÇÃO</th>
                         <th></th>
                     </tr>
-                    </thead>
-            {% for instance in queryset %}
+                </thead>
+                {% for instance in queryset %}
                 <tr>
-                    
-                    <td><a href="{% url 'atualizar_itens' instance.id %}">{{forloop.counter}}</a></td>
-                    <td>{{instance.categoria}}</td>
-                    <td>{{instance.nome_item}}</td>
+                    <td><a href="{% url 'atualizar_itens' instance.id %}">{{ forloop.counter }}</a></td>
+                    <td>{{ instance.categoria }}</td>
+                    <td>{{ instance.nome_item }}</td>
                     <td>{% if instance.quantidade <= instance.reorder_level %}
-                            <div class="fontealerta">{{instance.quantidade}}</div>
-                            {% else %}{{instance.quantidade}}</a>
-                            {% endif %}
-                        </button>
-                      </td>
-                    <td><a href="{% url 'reorderlevel' instance.id %}">{{instance.reorder_level}}</a></td>
-                    <!--<td>{{instance.data_adicionado}}</td>-->
-                    <td>{{instance.last_updated}}</td>
+                            <div class="fontealerta">{{ instance.quantidade }}</div>
+                        {% else %}
+                            {{ instance.quantidade }}
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'reorderlevel' instance.id %}">{{ instance.reorder_level }}</a></td>
+                    <td>{{ instance.last_updated }}</td>
                     <td>
                         <a href="{% url 'detalhe_estoque' instance.id %}"><button type="button" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></button></a>
-                        <a href="{%url 'delete_itens' instance.id %}"><button type="button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button></a> </td>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modaldeletar{{ instance.id }}">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
+                    </td>
                 </tr>
-            {% endfor %}
+                {% endfor %}
             </table>
         </div><!--End of display table-->
     </div>
 </main>
-{% include "footer.html" %}
 
+<!-- Modais de Exclusão -->
+{% for instance in queryset %}
+<div class="modal fade" id="modaldeletar{{ instance.id }}" tabindex="-1" aria-labelledby="modaldeletarLabel{{ instance.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modaldeletarLabel{{ instance.id }}">Confirmação de Exclusão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'delete_itens' instance.id %}">
+                    {% csrf_token %}
+                    <h1>Tem certeza que deseja Excluir?</h1>
+                    <p>Digite o nome do item "{{ instance.nome_item }}" para confirmar a exclusão</p>
+                    <input type="text" name="valor" />
+                    <input class="btn btn-danger" type="submit" value="Sim" />
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% include "footer.html" %}

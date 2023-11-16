@@ -201,10 +201,30 @@
     </div>
   </div>
 </nav>
-{%if messages %}
-<script>
-  {% for message in messages %}
-  alert('{{ message }}');
-  {% endfor %}
-</script>
-{% endif %}
+
+<div id="message-container">
+  {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-info" role="alert">
+              {{ message }}
+          </div>
+      {% endfor %}
+  {% endif %}
+</div>
+<!-- Modal -->
+<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="messageModalLabel">Mensagem</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+              <div id="modal-message-content"></div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+          </div>
+      </div>
+  </div>
+</div>

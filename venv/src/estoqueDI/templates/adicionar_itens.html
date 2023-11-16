@@ -3,7 +3,7 @@
 {% include "header.html" %}
 
 <main class="container">
-    <div class="bg-body-tertiary p-5 rounded, display_table">
+    <div class="efeito-vidro display_table">
         <h1 class="titulo">{{title}}</h1>
         <form method='POST' action=''>{% csrf_token %}
 			{{form|crispy}}

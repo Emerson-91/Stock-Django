@@ -1,6 +1,8 @@
 ﻿body {
-    background-color: #363636;
-    color: aliceblue;
+    background-image: url('../img/bg.jpg');
+    background-repeat: repeat-y;
+    background-size: contain;
+    color: aliceblue !important;
 }
 
 /*Align the title to the center of the page*/
@@ -10,6 +12,16 @@
     width: 95%;
     margin: auto;
     text-align: center;
+}
+
+.efeito-vidro {
+    padding: 4% !important;
+    background: rgba(3, 0, 0, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .form-login {

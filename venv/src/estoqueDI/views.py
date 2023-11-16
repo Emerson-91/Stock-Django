@@ -87,12 +87,19 @@ def atualizar_itens(request, pk):
 
 @login_required
 def delete_itens(request, pk):
-    queryset = Stock.objects.get(id=pk)
+    instance = Stock.objects.get(id=pk)
+
     if request.method == 'POST':
-        queryset.delete()
-        messages.success(request, 'Deletado com sucesso')
-        return redirect('/lista_itens')
-    return render(request, 'delete_itens.html')
+        valor_digitado = request.POST.get('valor', '')
+
+        if valor_digitado == instance.nome_item:
+            instance.delete()
+            messages.success(request, 'Deletado com sucesso')
+            return redirect('/lista_itens')
+        else:
+            messages.error(request, 'Nome do item incorreto. Tente novamente.')
+
+    return redirect('/lista_itens')
 
 @login_required
 def detalhe_estoque(request, pk):

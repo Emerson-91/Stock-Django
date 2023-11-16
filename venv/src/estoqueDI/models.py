@@ -31,7 +31,7 @@ class Stock(models.Model):
     reorder_level = models.IntegerField(default='0', blank=True, null=True)
     last_updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     data_adicionado = models.DateTimeField(auto_now_add=True, auto_now=False)
-    data = models.DateTimeField(auto_now_add=False, auto_now=False)
+    data = models.DateTimeField(auto_now_add=True, auto_now=False)
 
     # exportar_para_CSV = models.BooleanField(default=False)
 

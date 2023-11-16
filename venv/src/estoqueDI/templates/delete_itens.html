@@ -1,11 +1,20 @@
 ﻿{% load static %}
 {% include "header.html" %}
-
-<form method="POST" action="">
-    {% csrf_token%}
-    <h1> Tem certeza que deseja Excluir? </h1>
-    <input class="btn btn-danger" type="submit" value="Sim" />
-    <a href="/lista_itens"><div class="btn btn-primary">Cancelar</div></a>
-</form>
+<div class="efeito-vidro display_table">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <h2 class="titulo"> Tem certeza que deseja Excluir? </h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="text-{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% else %}
+            <p> Digite o nome do item para confirmar a exclusão </p>
+            <input type="text" name="valor" />
+            <input class="btn btn-danger" type="submit" value="Sim" />
+            <a href="/lista_itens"><div class="btn btn-primary">Cancelar</div></a>
+        {% endif %}
+    </form>
+</div>    
 
 {% include "footer.html" %}

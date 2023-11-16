@@ -2,7 +2,7 @@
 {% include "header.html" %}
 {% load crispy_forms_tags %}
 <main class="container">
-    <div class="bg-body-tertiary p-5 rounded display_table">
+    <div class="efeito-vidro display_table">
     <h2 class="titulo">{{title}}</h2>
       <form method='POST' action=''>{% csrf_token %}
         {{form|crispy}}

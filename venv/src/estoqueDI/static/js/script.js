@@ -12,3 +12,13 @@ $(document).ready(function () {
     });
 });
 
+//MODAL DAS MENSAGENS
+$(document).ready(function () {
+    var messagesContainer = $('#message-container');
+    var modalMessageContent = $('#modal-message-content');
+
+    if (messagesContainer.length && messagesContainer.children().length) {
+        messagesContainer.children().appendTo(modalMessageContent);
+        $('#messageModal').modal('show');
+    }
+});
