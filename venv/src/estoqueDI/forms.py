@@ -32,7 +32,7 @@ class stockSearchForm(forms.ModelForm):
 
 class StockHistorySearchForm(forms.ModelForm):
     exportar_para_csv = forms.BooleanField(required=False)
-    exportar_para_pdf = forms.BooleanField(required=False)
+    #exportar_para_pdf = forms.BooleanField(required=False)
     data_inicio = forms.DateTimeField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     data_fim = forms.DateTimeField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     class Meta:
