@@ -1,7 +1,7 @@
 ﻿{% load static %}
 <main class="container">
     <div class="efeito-vidro display_table">
-        <h1 class="titulo">Materiais com estoque Zerado</h1>
+        <h3 class="titulo">Materiais abaixo do nível do reabastecimento</h3>
         </br>
         <div class="display_table2">
             <table class='table'>
@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 {% for instance in queryset %}
-                    {% if instance.quantidade == 0 %}
+                    {% if instance.quantidade <= instance.reorder_level %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>{{ instance.categoria }}</td>
