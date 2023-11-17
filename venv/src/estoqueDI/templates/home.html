@@ -5,6 +5,7 @@
     <h1>{{text}}</h1>
     <p class="lead">Sistema desenvolvido para controle de entrada e saida de materiais novos e usados do <br> <strong>Departamento de Informática - Suporte e Redes </strong>.</p>
     {% if request.user.is_authenticated %}
+        {% include "lista_nivel_abaixo.html"%}
         {% else %}
         <h3> Para iniciar Faça <a class="btn btn-info" href="/accounts/login">Login</a></h3>
         {% endif %}

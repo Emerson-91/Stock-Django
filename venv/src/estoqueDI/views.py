@@ -13,9 +13,12 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     title = "Home Page"
     text = "Controle de Estoque DI - Suporte e Redes"
+    queryset = Stock.objects.all()
+    print(queryset)
     context = {
         "title": title,
-        "text": text
+        "text": text,
+        "queryset":queryset
     }
     return render(request, "home.html", context)
 

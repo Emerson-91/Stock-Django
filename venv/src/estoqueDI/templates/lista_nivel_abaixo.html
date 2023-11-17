@@ -1,0 +1,37 @@
+﻿{% load static %}
+<main class="container">
+    <div class="efeito-vidro display_table">
+        <h1 class="titulo">Materiais com estoque Zerado</h1>
+        </br>
+        <div class="display_table2">
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>CATEGORIA</th>
+                        <th>NOME DO ITEM</th>
+                        <th>QUANTIDADE NO ESTOQUE</th>
+                    </tr>
+                </thead>
+                {% for instance in queryset %}
+                    {% if instance.quantidade == 0 %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ instance.categoria }}</td>
+                            <td>{{ instance.nome_item }}</td>
+                            <td>{{ instance.quantidade }}</td>
+                            {% else %}
+                    {% endif %}
+                {% endfor %}
+                {% if queryset|length == 0 %}
+                    <tr>
+                        <td> --- </td>
+                        <td> --- </td>
+                        <td> --- </td>
+                        <td> --- </td>
+                    </tr>
+                {% endif %}
+            </table>
+        </div><!--End of display table-->
+    </div>
+</main>
