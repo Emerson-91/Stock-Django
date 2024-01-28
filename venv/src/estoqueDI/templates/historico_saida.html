@@ -11,7 +11,6 @@
       <table class='table'>
         <thead>
             <tr>
-              <th>COUNT</th>
               <th>CATEGORIA</th>
               <th>NOME ITEM</th>
               <th>QUANTIDADE ENTREGUE</th>
@@ -22,7 +21,6 @@
         {% for instance in queryset %}
             <tr>
             {% if instance.quantidade_entregue > 0 %}
-              <td>{{forloop.counter}}</td>
               <td>{{instance.categoria}}</td>
               <td>{{instance.nome_item}}</td>
               <td>{{instance.quantidade_entregue}}</td>
