@@ -1,8 +1,10 @@
 ﻿body {
     background-image: url('../img/bg.jpg');
-    background-repeat: repeat-y;
+
     background-size: contain;
+    background-attachment: fixed;
     color: aliceblue !important;
+    min-height: 100vh;
 }
 
 /*Align the title to the center of the page*/
@@ -102,4 +104,8 @@ th {
     align-items: center;
     /* Centraliza verticalmente */
 
+}
+
+th.sortable {
+    cursor: pointer;
 }
