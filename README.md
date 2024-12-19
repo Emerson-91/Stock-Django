@@ -1,12 +1,15 @@
-# Controle de Estoque Django
+# Sistema de Gerenciamento de Estoque
 
-Projeto criado usando python 3.11 e Django 4
+## Visão Geral
+Este projeto é um sistema de gerenciamento de estoque desenvolvido com Django 4 e Python 3.11. O sistema permite gerenciar a entrada e saída de materiais, além de listar os itens disponíveis no estoque.
 
-Para testar primeiro ative o ambiente virtual e instale os requirements.txt
+### Tecnologias Utilizadas
+- **Backend**: Django 4
+- **Linguagem**: Python 3.11
+- **Banco de Dados**: SQLite (padrão do Django, pode ser alterado)
+- **Ambiente Virtual**: `venv` (para gerenciar dependências)
 
 ## Funcionalidades
-
-- entrada de materiais
-- saida de materiais
-- listagem de itens
-
+1. **Entrada de Material**: Permite registrar a entrada de novos materiais no estoque.
+2. **Saída de Material**: Permite registrar a saída de materiais do estoque.
+3. **Listagem de Itens**: Exibe uma lista dos materiais cadastrados no sistema, com opções de filtragem.
